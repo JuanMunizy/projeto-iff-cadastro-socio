@@ -1,10 +1,6 @@
-<style>
-    h1 {
-        color: white;
-    }
-</style>
-<h1>Novo Usuário</h1>
-<form action="?page=salvar" method="POST">
+
+<h2>Novo Usuário</h2>
+<form action="/salvar" method="POST">
     <input type="hidden" name="acao" value="cadastrar">
     <div class="mb-3">
         <label>Nome</label>

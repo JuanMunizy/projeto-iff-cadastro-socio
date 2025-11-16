@@ -28,13 +28,25 @@
       font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
       align-items: last baseline;
       font-size: medium;
+      color: red;
+    }
+    body {
+      background-image: url(wp10522193.jpg);
+      background-size: cover;
+      background-attachment: fixed;
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+    
+    form {
       color: white;
     }
 
-    body {
-      background-position: center center;
-      background-attachment: fixed;
-      background-size: cover;
+    h2 {
+      color: white;
+    }
+    h1 {
+      color: white;
     }
   </style>
 

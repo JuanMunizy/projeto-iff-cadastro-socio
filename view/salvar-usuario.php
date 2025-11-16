@@ -17,7 +17,7 @@ if (isset($_REQUEST["acao"])) {
             $sql = "INSERT INTO clientes (nome, telefone, data_de_nascimento, email, senha) 
                     VALUES (?, ?, ?, ?, ?)";
                     
-            $stmt = $con->prepare($sql);
+            $stmt = $conn->prepare($sql);
             
             if ($stmt === false) {
                 print "<script>alert('Erro na preparação do SQL. Motivo: " . $con->error . "');</script>";
