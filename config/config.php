@@ -1,12 +1,24 @@
 <?php
-define('HOST', 'localhost');
-define('USER', 'root');
-define('PASS', '');
-define('BASE', 'clientes'); 
 
-$conn = mysqli_connect(HOST, USER, PASS, BASE);
+final class Database {
+	private const HOST = 'localhost';
+	private const USER = 'root';
+	private const PASS = '';
+	private const BASE = 'clientes'; 
 
-if (mysqli_connect_errno()) {
-    echo "Falha ao conectar ao MySQL: " . mysqli_connect_error();
-    exit();
+	public static function connect(): mysqli {
+		$conn = new mysqli(
+			self::HOST,
+			self::USER,
+			self::PASS,
+			self::BASE
+		);
+		echo "CONECTADO AO BANCO DE DADOS";
+
+		if (mysqli_connect_errno()) {
+    			echo "Falha ao conectar ao MySQL: " . mysqli_connect_error();
+    			exit();
+		}
+		return $conn;
+	}
 }

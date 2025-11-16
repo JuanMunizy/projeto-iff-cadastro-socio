@@ -1,8 +1,8 @@
 <?php
 
-if (isset($_REQUEST["acao"])) {
+if (isset($_GET["acao"])) {
     
-    switch ($_REQUEST["acao"]) {
+    switch ($_GET["acao"]) {
         
         case 'cadastrar':
             
@@ -16,8 +16,8 @@ if (isset($_REQUEST["acao"])) {
 
             $sql = "INSERT INTO clientes (nome, telefone, data_de_nascimento, email, senha) 
                     VALUES (?, ?, ?, ?, ?)";
-                    
-            $stmt = $conn->prepare($sql);
+            $db = Database::connect();
+            $stmt = $db->prepare($sql);
             
             if ($stmt === false) {
                 print "<script>alert('Erro na preparação do SQL. Motivo: " . $con->error . "');</script>";
@@ -34,7 +34,7 @@ if (isset($_REQUEST["acao"])) {
             }
             
             $stmt->close();
-            print "<script>location.href='index.php?page=listar';</script>";
+            print "<script>location.href='/';</script>";
             
             break;
 

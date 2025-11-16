@@ -31,8 +31,9 @@
       color: red;
     }
     body {
-      background-image: url(wp10522193.jpg);
       background-size: cover;
+	background-color: blue;
+	background-blend-mode: lighten;
       background-attachment: fixed;
       background-repeat: no-repeat;
       background-position: center;

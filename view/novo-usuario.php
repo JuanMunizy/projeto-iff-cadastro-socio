@@ -1,6 +1,5 @@
-
 <h2>Novo Usuário</h2>
-<form action="/salvar" method="POST">
+<form action="/salvar?acao=cadastrar" method="POST">
     <input type="hidden" name="acao" value="cadastrar">
     <div class="mb-3">
         <label>Nome</label>
