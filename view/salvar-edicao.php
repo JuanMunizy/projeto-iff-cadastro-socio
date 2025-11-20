@@ -1,6 +1,6 @@
 <?php
 
-require_once 'config/config.php';
+require_once '../config/config.php';
 
 if ($_SERVER["REQUEST_METHOD"] !== "POST") {
     header("Location: listar-usuarios.php");
@@ -30,17 +30,18 @@ try {
     $stmt->bind_param("sssi", $nome, $email, $telefone, $id); 
     
     if ($stmt->execute()) {
+        $stmt->close();
+        $conn->close();
+        
         header("Location: listar-usuarios.php?status=editado");
         exit;
     } else {
+        $stmt->close();
+        $conn->close();
         die("Erro ao atualizar o registro: " . $stmt->error);
     }
-
-    $stmt->close();
-    $conn->close();
 
 } catch (Exception $e) { 
     die("Erro de Processamento: " . $e->getMessage());
 }
-
 ?>
