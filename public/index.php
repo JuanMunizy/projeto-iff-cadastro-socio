@@ -2,133 +2,133 @@
 <html lang="PT-BR">
 
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Socio Torcedor Flamengo</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Socio Torcedor Flamengo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
 
 <body>
-  <footer>
-    <p>&copy; <?php echo date("Y"); ?> Flamengo. Todos os direitos Reservados
-    </p>
-  </footer>
-  
-
-  <style>
-    h1 {
-      font-size: 30px;
-      box-shadow: crimson;
-      font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-      background-position: center;
-      color: darkred;
-    }
-
-    p {
-      font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-      align-items: last baseline;
-      font-size: medium;
-      color: red;
-    }
-    body {
-      background-size: cover;
-      background-attachment: fixed;
-      background-repeat: no-repeat;
-      background-position: center;
-      background-image: url(wp10522193.jpg);
-      position: relative;
-    }
-    .overlay {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-     background-color: rgba(0, 0, 0, 0.5);
-    }
     
-    form {
-      color: white;
-    }
+    <style>
+        h1 {
+            font-size: 30px;
+            box-shadow: crimson;
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            background-position: center;
+            color: darkred;
+        }
 
-    h2 {
-      color: white;
-    }
-    h1 {
-      color: white;
-    }
+        p {
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            align-items: last baseline;
+            font-size: medium;
+            color: red;
+        }
 
-  </style>
+        body {
+            background-size: cover;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-image: url(wp10522193.jpg);
+            position: relative;
+        }
 
-  <nav class="navbar navbar-expand-lg navbar-dark bg-transparent">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="#">Cadastro</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
-        aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-        <div class="navbar-nav">
-          <a class="nav-link active" aria-current="page" , href="/">Inicio</a>
-          <a class="nav-link" href="novo">Novo Usuário</a>
-          <a class="nav-link" href="listar">Listar Usuários</a>
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        form {
+            color: white;
+        }
+
+        h2 {
+            color: white;
+        }
+
+        h1 {
+            color: white;
+        }
+    </style>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-transparent">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Cadastro</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+                aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <div class="navbar-nav">
+                    <a class="nav-link active" aria-current="page" href="/">Inicio</a>
+                    <a class="nav-link" href="novo">Novo Usuário</a>
+                    <a class="nav-link" href="listar">Listar Usuários</a>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-  </nav>
-  <div class="container mt-3">
-    <div class="container">
-      <div class="row">
-        <div class="col mt-5">
-          <?php
-          DEFINE('ROOT_PATH', dirname(__DIR__, 1));
+    </nav>
 
-          include ROOT_PATH . "/config/config.php";
-          include ROOT_PATH . "/controller/clienteController.php";
+    <div class="container mt-3">
+        <div class="container">
+            <div class="row">
+                <div class="col mt-5">
+                    <?php
+               
+                    DEFINE('ROOT_PATH', dirname(__DIR__, 1));
+                    include ROOT_PATH . "/config/config.php";
+                    include ROOT_PATH . "/controller/clienteController.php";
 
-          $requestUri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
-
-          if ($requestUri !== '/') {
-            $requestUri = rtrim($requestUri, '/');
-          }
-
-          switch ($requestUri) {
-            case "/":
-              ClienteController::index();
-              break;
-            case "/novo":
-              ClienteController::novoUsuario();
-              break;
-            case "/listar":
-              ClienteController::listar();
-              break;
-            case "/salvar":
-              ClienteController::salvar();
-              break;
-
-          }
-
-              switch($requestUri) {
-                case "/editar":
-                  ClienteController::editar();
-                  break;
-                  case "/excluir":
-                    ClienteController::excluir();
-                    break;
            
-          }
-          ?>
+                    $requestUri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+
+                    if ($requestUri != '/') {
+                        $requestUri = rtrim($requestUri, '/');
+                    }
+
+                    switch ($requestUri) {
+                        case "/":
+                            ClienteController::index();
+                            break;
+                        case "/novo":
+                            ClienteController::novoUsuario();
+                            break;
+                        case "/listar":
+                            ClienteController::listar();
+                            break;
+                        case "/salvar":
+                            ClienteController::salvar();
+                            break;
+                        case "/editar":
+                            ClienteController::editar();
+                            break;
+                        case "/excluir":
+                            ClienteController::excluir();
+                            break;
+                        case "/editar/salvar":
+                            ClienteController::salvarEdicao();
+                            break;
+                    }
+                    ?>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
-  <div>
+    <div>
+
+    <footer>
+        <p>&copy; <?php echo date("Y"); ?> Flamengo. Todos os direitos Reservados</p>
+    </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-      crossorigin="anonymous"></script>
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
 </body>
 
 </html>
-        
