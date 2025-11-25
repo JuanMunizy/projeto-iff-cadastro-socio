@@ -11,14 +11,14 @@ final class ClienteController {
     }
     
     public static function listar() {
-        $connn = Database::connect();
+        $conn = Database::connect();
         $sql = "SELECT * FROM clientes";
-        $res = $connn->query($sql);
+        $res = $conn->query($sql);
         $qtd = $res->num_rows;
 
         include ROOT_PATH . "/view/listar-usuarios.php";
 
-        $connn->close();
+        $conn->close();
     }
     
     public static function salvar() {
@@ -32,14 +32,20 @@ final class ClienteController {
         }
         $id = $_REQUEST['id'];
 
-        $connn = Database::connect();
-        $sql = "SELECT * FROM clientes WHERE id = $id";
-        $res = $connn->query($sql);
+        $conn = Database::connect();
+        $sql = "SELECT * FROM clientes WHERE id = ?";
         
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("i", $id);
+        $stmt->execute();
+        
+        $res = $stmt->get_result();
         $cliente_data = $res->fetch_object();
-        $connn->close();
+        
+        $stmt->close();
+        $conn->close();
 
-       include ROOT_PATH . "/view/editar-usuario.php";
+        include ROOT_PATH . "/view/editar-usuario.php";
     }
     
     public static function excluir() {
@@ -50,9 +56,12 @@ final class ClienteController {
 
         $id = $_REQUEST['id'];
         
-        $connn = Database::connect(); 
-        $sql = "DELETE FROM clientes WHERE id = $id";
-        $res = $connn->query($sql);
+        $conn = Database::connect(); 
+        $sql = "DELETE FROM clientes WHERE id = ?";
+        
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("i", $id);
+        $res = $stmt->execute();
         
         session_start();
         if ($res) {
@@ -63,9 +72,57 @@ final class ClienteController {
             $_SESSION['msg_text'] = 'Erro ao excluir usuário.';
         }
         
-        $connn->close();
+        $stmt->close();
+        $conn->close();
         header('Location: /listar');
         exit;
+    } 
+
+    public static function salvarEdicao() {
+        if ($_SERVER["REQUEST_METHOD"] !== "POST") {
+            header("Location: /listar");
+            exit();
+        }
+
+        $id = $_POST["id"] ?? null;
+        $nome = $_POST["nome"] ?? null;
+        $email = $_POST["email"] ?? null;
+        $telefone = $_POST["telefone"] ?? null;
+
+        if (empty($id) || !is_numeric($id)) {
+            die("Erro: ID de cliente ausente ou inválido.");
+        }
+
+        try {
+            $conn = Database::connect();
+
+            $sql_update = "UPDATE clientes SET nome = ?, email = ?, telefone = ? WHERE id = ?";
+
+            $stmt = $conn->prepare($sql_update);
+
+            if ($stmt === false) {
+                die("Erro na preparação da query: " . $conn->error);
+            }
+
+            $stmt->bind_param("sssi", $nome, $email, $telefone, $id);
+
+            if ($stmt->execute()) {
+                $stmt->close();
+                $conn->close();
+
+                header("Location: /listar");
+                exit();
+            } else {
+                $stmt->close();
+                die("Erro ao atualizar o registro: " . $stmt->error);
+            }
+
+        } catch (Exception $e) {
+            die("Erro de Processamento: " . $e->getMessage());
+        }
+
     }
-}
-?>
+    
+
+
+}?>

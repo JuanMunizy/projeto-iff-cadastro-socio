@@ -41,32 +41,31 @@ try {
 <head>
     <title>Editar Usuário</title>
     </head>
-<body>
-   <div class="container mt-5">
+<head>
+</head>
+<div class="container mt-5">
     <h1 class="mb-4">Editar Usuário: <?php echo htmlspecialchars($usuario['nome']); ?></h1>
-    
     <form action="/editar/salvar" method="POST">
-    
+        
         <input type="hidden" name="id" value="<?php echo htmlspecialchars($usuario['id']); ?>">
-    
+        
         <div class="mb-3">
             <label for="nome" class="form-label">Nome</label>
             <input type="text" name="nome" id="nome" class="form-control"
                 value="<?php echo htmlspecialchars($usuario['nome']); ?>" required>
         </div>
-    
+        
         <div class="mb-3">
             <label for="email" class="form-label">Email</label>
             <input type="email" name="email" id="email" class="form-control"
                 value="<?php echo htmlspecialchars($usuario['email']); ?>" required>
         </div>
-    
+        
         <div class="mb-3">
             <label for="telefone" class="form-label">Telefone</label>
             <input type="text" name="telefone" id="telefone" class="form-control"
                 value="<?php echo htmlspecialchars($usuario['telefone']); ?>">
         </div>
-        
         </form>
 </div>>
 
